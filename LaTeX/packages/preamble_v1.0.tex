@@ -1,0 +1,205 @@
+%% PAQUETES DISPONIBLES
+\usepackage[utf8]{inputenc} %codificación 
+\usepackage[spanish, es-lcroman]{babel} %idioma
+\usepackage{float}% para usar H
+\usepackage{amsmath} %matemáticas
+\usepackage{empheq} 
+\usepackage{amsthm}
+\usepackage{nccmath}
+\usepackage{mathrsfs} %% curly letters 
+\usepackage{mathtools} %matemáticas
+\usepackage{physics} %diferenciales
+\usepackage{blindtext}%texto de relleno
+\usepackage{amsfonts} %matemáticas
+\usepackage{amssymb} %matemáticas
+\usepackage{makeidx} 
+\usepackage{graphicx} %imágenes
+\usepackage[a4paper, margin=2cm, scale=0.8]{geometry}
+\usepackage{wrapfig} %figuras alrededor de texto
+\usepackage{caption} %subtítulos de figuras
+\usepackage{setspace}%interlineado 
+\usepackage{array}% entorno array
+\usepackage{ragged2e} %alineación 
+\usepackage{tabularx} %entorno tabularx (tablas con ancho fijo)
+\usepackage{fancyhdr} %cabeceros y pies de página
+\usepackage{multirow} %combinar columnas y filas en una tabla
+\usepackage{longtable} %mediante este paquete podemos separar una tabla larga en varias que ocupen las páginas necesarias.
+\usepackage[table]{xcolor} %con este paquete cambiamos el color de los objetos y concretamente de la opción de las tablas.
+\usepackage{enumitem}%enumeraciones personalizadas
+\usepackage{subcaption}%subtítulos de figuras y subfiguras
+\usepackage{hyperref} % este paquete siempre debemos colocarlo al final 
+\usepackage{multicol} %columnas
+\usepackage{parskip} %espaciado entre párrafos
+\usepackage[rightcaption]{sidecap} %subtítulos alrededor de figuras
+\usepackage{ifthen} %condicionales
+\usepackage{xparse} % Para manejar parámetros opcionales
+
+% FORMATO PARA FIGURAS Y SUBFIGURAS
+\DeclareCaptionFormat{format1}{
+%#1=label, #2 = separator, #3 = text
+	\textbf{#1#2}#3
+}
+
+\DeclareCaptionFormat{format2}{
+%#1=label, #2 = separator, #3 = text
+\textsc{#1#2}#3
+}  
+
+\DeclareCaptionLabelSeparator{parentesis}{$)\,$ }
+\DeclareCaptionStyle{subfigura}{
+format = format1, 
+justification = raggedright, 
+labelsep = parentesis,
+font = {color = black, huge},
+}
+\DeclareCaptionStyle{subfigura2}{
+format = format1, 
+justification = raggedright, 
+labelsep = parentesis,
+font = {color = black, Large},
+}
+%% COMANDO PARA TITULOS
+\NewDocumentCommand{\settitle}{O{0} O{0} m}{
+	% [nombre del autor][nombre de la asignatura]{titulo}
+\ifthenelse{\equal{#1}{0}}{}{\author{\Large{#1}}}
+\ifthenelse{\equal{#2}{0}}
+	{
+	\date{\vspace*{1em}
+	\hrule
+	\vspace*{1em}}}
+	{\date{\Large{UAM - #2}\vspace*{1em}
+	\hrule
+	\vspace*{1em}}
+	}
+\title{\Huge \textbf{#3}}
+}
+
+%% COMANDO PARA ELEGIR FORMATO
+\NewDocumentCommand{\setformat}{O{0.8\textwidth} O{centering} m}
+% [ancho de figuras][alineacion de figuras]{cabecero derecho}
+% tras elegir este comando no olvidar usar \brightmode y \darkmode para cambiar aplicar el formato deseado
+{
+%FORMATO PARA PÁGINAS OSCURAS Y CLARAS
+\fancypagestyle{claroi}{
+\fancyhf[]{}
+\fancyhead[L]{\color{black}\textsc{UAM}}
+\fancyhead[R] {\color {black}\textsc{#3}}
+\fancyfoot[C]{\color{black}\thepage}
+\setlength{\headheight}{18pt} 
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\headruleskip}{-0.5em}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{black}\leaders\hrule height \headrulewidth\hfill}}
+  \renewcommand{\footrulewidth}{0pt}
+}
+
+\fancypagestyle{oscuroi}{
+\fancyhf[]{}
+\fancyhead[L]{\color{white}\textsc{UAM}}
+\fancyhead[R] {\color {white}\textsc{#3}}
+\fancyfoot[C]{\color{white}\thepage}
+\renewcommand{\headrulewidth}{0.75pt}
+\renewcommand{\headruleskip}{-0.5em}
+\renewcommand{\headrule}{\hbox to\headwidth{%
+    \color{white}\leaders\hrule height \headrulewidth\hfill}}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\DeclareCaptionStyle{figura_claro_custom}{
+format = format1, 
+justification = #2,
+font = {color = black,small},
+name = Fig.,
+width = #1
+}
+
+\DeclareCaptionStyle{figura_oscuro_custom}{
+format = format1, 
+justification = #2,
+font = {color = white,small},
+name = Fig.,
+width = #1
+}
+
+\DeclareCaptionStyle{tabla_claro_custom}{
+format = format1, 
+justification = #2,
+font = {color = black,small},
+name = Tabla,
+width = #1
+}
+
+\DeclareCaptionStyle{tabla_oscuro_custom}{
+format = format1, 
+justification = #2,
+font = {color = white,small},
+name = Tabla,
+width = #1
+}
+
+
+% MODO OSCURO O CLARO
+\def\darkmode{
+\pagecolor{black}
+\color{white}
+\pagestyle{oscuroi}
+\captionsetup[figure]{style=figura_oscuro_custom}
+\captionsetup[table]{style = tabla_oscuro_custom}
+\hypersetup{
+colorlinks = true,%% atento a la separación con comas
+%% si colocas colorlinks = false aparecen cajas alrededor de los links pero no se ven ni con texmaker ni los navegadores convencionales,en cambio sí que se ve con adobe acrobat reader. 
+linkcolor = cyan, 
+citecolor= cyan,
+filecolor = magenta, 
+urlcolor = cyan,
+pdfpagemode = FullScreen,
+urlbordercolor = {1 0 0},
+linktocpage = false, %% si es verdadero son las páginas del índice las que quedan referenciadas
+}
+}
+\def\brightmode{
+\pagecolor{white}
+\color{black}
+\pagestyle{claroi}
+\captionsetup[figure]{style=figura_claro_custom}
+\captionsetup[table]{style = tabla_claro_custom}
+}
+\hypersetup{
+colorlinks = true,%% atento a la separación con comas
+%% si colocas colorlinks = false aparecen cajas alrededor de los links pero no se ven ni con texmaker ni los navegadores convencionales,en cambio sí que se ve con adobe acrobat reader. 
+linkcolor = blue, 
+citecolor= blue,
+filecolor = magenta, 
+urlcolor = blue,
+pdfpagemode = FullScreen,
+urlbordercolor = {1 0 0},
+linktocpage = false, %% si es verdadero son las páginas del índice las que quedan referenciadas
+}
+}
+\urlstyle{same}
+\definecolor{coolgreen}{RGB}{15, 219, 97}
+%QUITAR NÚMERO EN UNA PÁGINA
+\def\resetnumpagetitle{
+\thispagestyle{empty}
+\newpage
+\setcounter{page}{1}
+}
+%% COMANDOS MATEMÁTICOS
+\DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
+\DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
+\renewcommand{\grad}{\textrm{\textbf{grad}}} 
+\newcommand{\appeq}{\backsimeq} %%aproximaciones
+\newcommand{\FT}[1]{\mathcal{F}\{#1\}} % Transformada de Fourier 
+\newcommand{\LT}[1]{\mathcal{L}\left\{ #1 \right\}} %Transformada de Laplace
+\newcommand{\BLT}[1]{\mathcal{B}\left\{#1\right\}} % Transformada bilateral de Laplaca
+\newcommand{\mean}[1]{\langle#1\rangle} % medias
+\newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2} % big O notation
+
+%% COMANDO PARA RESOLUCIÓN
+\newcommand{\Resolucion}{\vspace*{1em}
+\hrule
+\vspace*{1em}
+{\color{blue} Resolución:}\\
+
+}
+
+
