@@ -1,0 +1,16 @@
+#include "../error_class.cpp"
+using namespace std;
+
+int main(){
+  errores *V;
+  V = new errores [3];
+  V[0].set_in_file_name("Archivo1");
+  V[1].set_in_file_name("Archivo2");
+  V[2].set_in_file_name("Archivo3");
+  for (int j = 0; j<= 2; j++){
+    V[j].escribe_fichero();
+  }
+  cout<<"Número de filas primer archivo: "<<V[0].A_aprox.RowNo()<<endl;
+  make_table(V,3,"Latex Table");
+  
+}

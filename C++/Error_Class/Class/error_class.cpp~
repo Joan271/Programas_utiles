@@ -1,0 +1,186 @@
+#include<iostream>
+#include<iomanip>
+#include <fstream>
+#include <cmath>
+#include <string>
+#include "../matrix.h"
+using namespace std;
+class errores{
+private:
+  string name; //nombre del archivo original
+  string nombre; //nombre del archivo con las aproximaciones
+public:
+  math::matrix <double> A;
+  math::matrix <double> A_aprox;
+  errores(){};
+  errores(string NAME){
+    /*Indica el nombre del archivo sin extensión y se crea automáticamente
+      un nombre para el archivo con los errores aproximados*/
+    string txt = ".txt"; //extensión del archivo
+    name = NAME + txt;
+    string aprox = "_aprox";
+    nombre = NAME + aprox + txt;
+    int columnas = 2;
+    int filas = contar(name, columnas);
+    fstream fich;
+    math::matrix <double> B (filas,columnas);
+    fich.open(name,fstream::in);
+    fich>>B;
+    fich.close();
+    A = B; 
+    math::matrix <double> B_aprox(filas,columnas);
+    MATRIX_aprox(B,&B_aprox);
+    A_aprox = B_aprox;
+  }
+  errores(string NAME, string NOMBRE){
+    /*Indica el nombre del archivo original y el nombre del archivo con
+     las aproximaciones*/ 
+    string txt = ".txt"; //extensión del archivo
+    name = NAME + txt;
+    nombre = NOMBRE + txt;
+    int columnas = 2;
+    int filas = contar(name, columnas);
+    fstream fich;
+    math::matrix <double> B (filas,columnas);
+    fich.open(name,fstream::in);
+    fich>>B;
+    fich.close();
+    A = B; 
+    math::matrix <double> B_aprox(filas,columnas);
+    MATRIX_aprox(B,&B_aprox);
+    A_aprox = B_aprox;
+  }
+  int contar(string, int);
+  int cifra(double);
+  void MATRIX_aprox(math::matrix <double>, math::matrix <double>*);
+  void escribe_fichero(){
+    fstream fs;
+    fs.open(nombre,fstream::out);
+    fs<<A_aprox;
+    fs.close();
+  };
+  void set_in_file_name(string NAME){
+    string txt = ".txt"; //extensión del archivo
+    name = NAME + txt;
+    string aprox = "_aprox";
+    nombre = NAME + aprox + txt;
+    int columnas = 2;
+    int filas = contar(name, columnas);
+    fstream fich;
+    math::matrix <double> B (filas,columnas);
+    fich.open(name,fstream::in);
+    fich>>B;
+    fich.close();
+    A = B; 
+    math::matrix <double> B_aprox(filas,columnas);
+    MATRIX_aprox(B,&B_aprox);
+    A_aprox = B_aprox;
+  };
+  void set_files_name(string NAME, string NOMBRE){
+    string txt = ".txt"; //extensión del archivo
+    name = NAME + txt;
+    nombre = NOMBRE + txt;
+    int columnas = 2;
+    int filas = contar(name, columnas);
+    fstream fich;
+    math::matrix <double> B (filas,columnas);
+    fich.open(name,fstream::in);
+    fich>>B;
+    fich.close();
+    A = B; 
+    math::matrix <double> B_aprox(filas,columnas);
+    MATRIX_aprox(B,&B_aprox);
+    A_aprox = B_aprox;
+  };
+  
+};
+
+int errores::contar (string s, int col){
+//int col = 2; //siempre hay dos columnas, una con el valor
+  fstream f1;
+  f1.open(s,fstream::in); //leemos el fichero
+  double x;
+  f1>>x;
+  int N = 0;
+  while(!f1.eof()){
+    N++;
+    f1>>x;
+  };
+  return N/col;
+  f1.close();
+}
+
+int errores::cifra(double x){
+  double y = x;
+  int j = 0;
+  if (x>=10){
+    while (y>10){
+      y =  y/10;
+      j++; 
+    }
+  }
+  else if(x<1){
+    while(y<1){
+      y*= 10;
+      j--;
+    }
+  }
+ return j;
+  
+}
+
+
+
+
+void errores::MATRIX_aprox (math::matrix<double> X, math::matrix<double> *Xaprox){
+  // X es la matriz con (Magnitud, errores)
+  double yerr,yx, eps, z1,z2,eps0 = 0.1;
+  double xaprox, epsaprox;
+  double x, err; 
+  for(int i = 0; i<X.RowNo(); i++){
+   x = X(i,0);
+   err = X(i,1);
+    
+  //búsqueda de la cifra signficativa del error
+  int j = cifra(err);
+    yerr = err*pow(10,-j); 
+    z2 = round(yerr*10);//Redondeo de la segunda cifra 
+    z1 = round(yerr)*10;//Redondeo a la primera cifra
+    eps = abs(z1 - z2)/z2;
+    
+    if(eps>=eps0){
+      epsaprox = z2*pow(10,j-1);
+      yx = x*pow(10,-j+1);
+      yx = round(yx);
+      xaprox = yx*pow(10,j-1);
+    }
+    else {
+      epsaprox = z1*pow(10,j-1);
+      yx = x*pow(10,-j);
+      yx = round(yx);
+      xaprox = yx*pow(10,j);
+    }
+  (*Xaprox)(i,0) = xaprox;
+  (*Xaprox)(i,1) = epsaprox;
+  }
+}
+
+void make_table (errores *X, int col,string nombre){
+  fstream fs;
+  string txt = ".txt";
+  fs.open(nombre + txt, fstream::out);
+  int N = X[0].A_aprox.RowNo();/*Se asume que todos los archivos
+			 tienen el mismo número de filas*/
+  
+  for (int j = 0; j<N; j++){
+    for(int k = 0; k<col; k++){
+      fs<<X[k].A_aprox(j,0)<<" $\\pm$ "<<X[k].A_aprox(j,1)<<" ";
+      if (k != col-1){fs<<"& ";};
+      }
+    if(j!=N-1){
+    fs<<"\\\\"<<endl;
+    } 
+  }
+  fs.close();
+  }
+
