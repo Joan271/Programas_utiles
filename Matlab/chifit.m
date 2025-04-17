@@ -80,4 +80,3 @@ for j = 1:numel(x)
 chi = chi + (y(j)-alpha1*x(j)-alpha2)^2/sigma2(j);
 end
 end
-
