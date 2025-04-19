@@ -1,0 +1,110 @@
+function [m,n,r,dm,dn] = chiplot(x,y,ddy,color)
+% [m,n,r,dm,dn] = chiplot(x,y,ddy,color)
+% (x,y): vectores con puntos experimentales
+%dy: vectores con incertidumbres de la variable con mayor incertidumbre
+%Ajuste lineal: y = a1*x + a2
+%
+% elementos en filas o a una columna
+
+X=x; Y=y; dY=ddy;
+s=size(y);
+rows=s(1);
+szx=size(x);
+sdy=size(ddy);
+
+if szx(1)<rows
+    if rem(rows,szx(1))==0
+        for tm=2:(rows/szx(1))
+            X=[X;x];
+        end
+    end
+end
+if sdy(1)<rows
+    if rem(rows,sdy(1))==0
+        for tm=2:(rows/sdy(1))
+            dY=[dY;ddy];
+        end
+    end
+end
+m=zeros(rows,1); n=m; r=m; dm=m; dn=m;
+
+for rw=1:rows
+    x=X(rw,:); 
+    y=Y(rw,:); 
+    ddy=dY(rw,:);
+
+%Estimación de errores: dm, dn
+
+dy2 = ddy.^2;
+yx = 0; N = 0; ys = 0; xs = 0; xx=0; yy =0;
+for j = 1:numel(x)
+    yx = yx + y(j)*x(j)/dy2(j); 
+    N = N + 1/dy2(j);
+    ys = ys + y(j)/dy2(j); 
+    xs = xs + x(j)/dy2(j);
+    xx = xx + x(j)^2/dy2(j);
+    yy = yy + y(j)^2/dy2(j);
+end
+m(rw) = (yx*N - ys*xs)/(xx*N-xs^2);
+n(rw) = (ys*xx - yx*xs)/(xx*N-xs^2);
+
+    dx=N*xx-xs^2;
+    dy=N*yy-ys^2;
+r(rw) = m(rw)*sqrt(dx/dy);
+
+f=m(rw).*x+n(rw); % para plot
+
+%Estimación del error
+dm(rw) = 0; dn(rw) = 0;
+
+x
+y
+ddy
+m(rw)
+n(rw)
+    chimin = chi(x,y,ddy,m(rw),n(rw));
+  % chimin = ((y-m(rw).*x-n(rw)).^2)*(1./dy2'); % (sin usar fun. chi ext.)
+  % g = @(a,b) chi(x,y,ddy,a,b)- chimin - 1; % ec ligadura alpha 1 = a, alhpa 2 = b
+    A = xx; B=N; C= -2*yx; D = -2*ys; E=2*xs; F= yy - chimin -1; 
+    clear yx N ys xs xx yy
+ 
+    %Deltalpha1
+    a = A - E^2/4/B; 
+    b = -D*E/2/B + C; 
+    c = - D^2/4/B + F; 
+    dm(rw) = abs(m(rw) - ec2grad(a,b,c));
+    
+    %Deltalpha2
+    a = B - E^2/4/A;
+    b = -E*C/2/A + D; 
+    c = -C^2/4/A + F;
+    dn(rw) = abs(n(rw) - ec2grad(a,b,c));
+
+% Representación
+hold on; plot(x,f,color,LineWidth=2);
+hold on; errorbar(x,y,ddy,'k',"LineStyle","none",LineWidth=1.5); 
+hold on; 
+
+    %plot(x,y,'.k')
+    %title('')
+    %xlabel('')
+    %ylabel('')
+    %legend('','','location','best')
+
+    % figure(Name="contorno")
+    % plot(alpha1,alpha2,'k +',MarkerSize=8)
+    % hold on
+    % fcontour(g, "LevelList",0)
+    % xlim([alpha1-1.1*deltalpha1, alpha1+1.1*deltalpha1]);
+    % ylim([alpha2 - 1.1*deltalpha2, alpha2+1.1*deltalpha2]);
+    % xlabel("\alpha_1");
+    % ylabel("\alpha_2");
+    % title("Contorno de \chi^2 y errores")
+    % hold on 
+    % fcontour(@(x,y) 2*B*y + D + E*x, "LevelList",0);
+    % hold on
+    % fcontour(@(x,y) 2*A*x + C + E*y, "LevelList",0);
+    % grid on
+
+
+end
