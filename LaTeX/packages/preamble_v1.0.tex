@@ -61,7 +61,7 @@ font = {color = black, Large},
 %% COMANDO PARA TITULOS
 \NewDocumentCommand{\settitle}{O{0} O{0} m}{
 	% [nombre del autor][nombre de la asignatura]{titulo}
-\ifthenelse{\equal{#1}{0}}{}{\author{\Large{#1}}}
+\ifthenelse{\equal{#1}{0}}{}{\author{#1}}
 \ifthenelse{\equal{#2}{0}}
 	{
 	\date{\vspace*{1em}
