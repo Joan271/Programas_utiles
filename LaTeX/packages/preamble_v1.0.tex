@@ -45,7 +45,7 @@
 \textsc{#1#2}#3
 }  
 
-\DeclareCaptionLabelSeparator{parentesis}{$)\,$ }
+\DeclareCaptionLabelSeparator{parentesis}{$)\,$ } %chktex 9 chktex 10
 \DeclareCaptionStyle{subfigura}{
 format = format1, 
 justification = raggedright, 
@@ -189,11 +189,13 @@ linktocpage = false, %% si es verdadero son las páginas del índice las que que
 \renewcommand{\grad}{\textrm{\textbf{grad}}} 
 \newcommand{\appeq}{\backsimeq} %%aproximaciones
 \newcommand{\FT}[1]{\mathcal{F}\{#1\}} % Transformada de Fourier 
-\newcommand{\LT}[1]{\mathcal{L}\left\{ #1 \right\}} %Transformada de Laplace
-\newcommand{\BLT}[1]{\mathcal{B}\left\{#1\right\}} % Transformada bilateral de Laplaca
-\newcommand{\mean}[1]{\left \langle#1\right \rangle} % medias
+\newcommand{\LT}[1]{\mathcal{L}\left\{ #1 \right\}} %chktex 21 %Transformada de Laplace 
+\newcommand{\BLT}[1]{\mathcal{B}\left\{#1\right\}} %chktex 21  Transformada bilateral de Laplace
+\newcommand{\mean}[1]{\left \langle#1\right \rangle} % medias %chktex 21
 \newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2} % big O notation
-
+\newcommand{\tf}{\;\therefore\;} %chktex 21
+\newcommand{\bc}{\;\because\;} %chktex 21
+\newcommand{\Tr}{\mathrm{Tr}}
 %% COMANDO PARA RESOLUCIÓN
 \newcommand{\Resolucion}{\vspace*{1em}
 \hrule
