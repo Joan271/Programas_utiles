@@ -1,7 +1,13 @@
 \documentclass[11pt]{article}
-\input{packages/preamble_v1.0.tex}
+\usepackage{packages/fancy_preamble}
+\settitle[autor][asignatura]{Titulo}
 \begin{document}
+\maketitle
+Hello
 \begin{equation}
-    x + 3 = 1 \impliedby x = -2
+\begin{cases}
+x = 1\\ 
+x = 2 \implies \text{ No compatibles }
+\end{cases}  
 \end{equation}
 \end{document}

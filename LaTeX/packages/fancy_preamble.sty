@@ -1,0 +1,180 @@
+\ProvidesPackage{fancy_preamble}[2025/10/17 Mi preámbulo personalizado]
+
+%% CODIFICACIÓN Y IDIOMA
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[spanish]{babel}
+
+%% MATEMÁTICAS
+\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq}
+\RequirePackage[h]{esvect} % vectores ajustados al contenido
+
+%% FIGURAS Y TABLAS
+\RequirePackage{graphicx, float, wrapfig, caption, subcaption, array, tabularx, multirow, longtable, xcolor}
+
+%% DOCUMENTO Y FORMATO
+\RequirePackage[a4paper, margin=2cm]{geometry}
+\RequirePackage{setspace, ragged2e, fancyhdr, parskip, multicol, sidecap, ifthen, xparse, enumitem, hyperref}
+
+%% COLORES
+\definecolor{coolgreen}{RGB}{15, 219, 97}
+
+%% CAPTIONS
+\DeclareCaptionFormat{format1}{\textbf{#1#2}#3}
+\DeclareCaptionFormat{format2}{\textsc{#1#2}#3}
+\DeclareCaptionLabelSeparator{parentesis}{$)\,$}
+
+\DeclareCaptionStyle{subfigura}{format=format1, justification=raggedright, labelsep=parentesis, font={color=black, huge}}
+\DeclareCaptionStyle{subfigura2}{format=format1, justification=raggedright, labelsep=parentesis, font={color=black, Large}}
+
+
+%% ===========================
+%% COMANDOS DE TÍTULO
+%% ===========================
+\NewDocumentCommand{\settitle}{O{0} O{0} m}{ % [autor][asignatura]{título}
+    \ifthenelse{\equal{#1}{0}}{}{\author{#1}}
+    \ifthenelse{\equal{#2}{0}}
+        {\date{\vspace*{1em}\hrule\vspace*{1em}}}
+        {\date{\Large{UAM - #2}\vspace*{1em}\hrule\vspace*{1em}}}
+    \title{\Huge \textbf{#3}}
+}
+
+%% ===========================
+%% FORMATO DE PÁGINA
+%% ===========================
+\NewDocumentCommand{\setformat}{O{0.8\textwidth} O{centering} m}{
+    % [ancho de figuras][alineación]{cabecera derecha}
+
+    % Estilo claro
+    \fancypagestyle{claroi}{
+        \fancyhf{}
+        \fancyhead[L]{\color{black}\textsc{UAM}}
+        \fancyhead[R]{\color{black}\textsc{#3}}
+        \fancyfoot[C]{\color{black}\thepage}
+        \setlength{\headheight}{18pt}
+        \renewcommand{\headrulewidth}{0.75pt}
+        \renewcommand{\headruleskip}{-0.5em}
+        \renewcommand{\headrule}{\hbox to\headwidth{\color{black}\leaders\hrule height \headrulewidth\hfill}}
+        \renewcommand{\footrulewidth}{0pt}
+    }
+
+    % Estilo oscuro
+    \fancypagestyle{oscuroi}{
+        \fancyhf{}
+        \fancyhead[L]{\color{white}\textsc{UAM}}
+        \fancyhead[R]{\color{white}\textsc{#3}}
+        \fancyfoot[C]{\color{white}\thepage}
+        \renewcommand{\headrulewidth}{0.75pt}
+        \renewcommand{\headruleskip}{-0.5em}
+        \renewcommand{\headrule}{\hbox to\headwidth{\color{white}\leaders\hrule height \headrulewidth\hfill}}
+        \renewcommand{\footrulewidth}{0pt}
+    }
+
+    % Estilos de captions personalizados
+    \DeclareCaptionStyle{figura_claro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=black, small},
+        name=Fig.,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{figura_oscuro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=white, small},
+        name=Fig.,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{tabla_claro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=black, small},
+        name=Tabla,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{tabla_oscuro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=white, small},
+        name=Tabla,
+        width=#1
+    }
+
+    % hipersetup general
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+        pdfpagemode=FullScreen,
+        linktocpage=false
+    }
+    \urlstyle{same}
+}
+%% ===========================
+%% MODOS CLARO Y OSCURO
+%% ===========================
+\def\darkmode{
+    \pagecolor{black}
+    \color{white}
+    \pagestyle{oscuroi}
+    \captionsetup[figure]{style=figura_oscuro_custom}
+    \captionsetup[table]{style=tabla_oscuro_custom}
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=cyan, citecolor=cyan, filecolor=magenta, urlcolor=cyan,
+        pdfpagemode=FullScreen,
+        linktocpage=false
+    }
+}
+
+\def\brightmode{
+    \pagecolor{white}
+    \color{black}
+    \pagestyle{claroi}
+    \captionsetup[figure]{style=figura_claro_custom}
+    \captionsetup[table]{style=tabla_claro_custom}
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+        pdfpagemode=FullScreen,
+        linktocpage=false
+    }
+}
+
+%% COMANDOS MATEMÁTICOS
+\DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
+\DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
+\renewcommand{\grad}{\textrm{\textbf{grad}}} 
+\newcommand{\appeq}{\backsimeq}
+\newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
+\newcommand{\LT}[1]{\mathcal{L}\qty{#1}}
+\newcommand{\BLT}[1]{\mathcal{B}\qty{#1}}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2}
+\newcommand{\tf}{\;\therefore\;}
+\newcommand{\bc}{\;\because\;}
+\renewcommand{\Tr}[1]{\mathrm{Tr}\qty(#1)}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\eqdef}{\overset{\text{def}}{=}}
+\newcommand{\qeq}{\overset{\text{?}}{=}}
+
+%% ===========================
+%% COMANDO RESOLUCIÓN
+%% ===========================
+\newcommand{\Resolucion}{
+    \vspace*{1em}
+    \hrule
+    \vspace*{1em}
+    {\color{blue} Resolución:}\\
+}
+
+%% ===========================
+%% REINICIO DE NUMERACIÓN DE PÁGINA
+%% ===========================
+\def\resetnumpagetitle{
+    \thispagestyle{empty}
+    \newpage
+    \setcounter{page}{1}
+}
