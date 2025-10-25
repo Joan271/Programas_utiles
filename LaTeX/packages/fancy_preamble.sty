@@ -3,9 +3,9 @@
 %% CODIFICACIÓN Y IDIOMA
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[spanish]{babel}
-
-%% MATEMÁTICAS
-\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm}
+\decimalpoint
+%% MATEMÁTICAS y FISICA
+\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx}
 \RequirePackage[h]{esvect} % vectores ajustados al contenido
 \newtheorem{theorem}{Teorema}[section]
 \newtheorem{definition}{Definición}[section]
@@ -14,6 +14,8 @@
 \newtheorem{lemma}{Lema}[section]
 \theoremstyle{remark}
 \newtheorem{remark}{Observación}[section]
+\theoremstyle{definition} 
+\newtheorem{ex}{Ejercicio}
 %% FIGURAS Y TABLAS
 \RequirePackage{graphicx, float, wrapfig, caption, subcaption, array, tabularx, multirow, longtable, xcolor}
 
