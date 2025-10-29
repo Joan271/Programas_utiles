@@ -1,0 +1,26 @@
+\ProvidesPackage{ipe_package}[2025/10/17 paquetes para ipe]
+%% CODIFICACIÓN Y IDIOMA
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[spanish]{babel}
+\decimalpoint
+%% MATEMÁTICAS y FISICA
+\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx}
+\RequirePackage[h]{esvect} % vectores ajustados al contenido
+\RequirePackage[version=4]{mhchem}
+
+\DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
+\DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
+\renewcommand{\grad}{\textrm{\textbf{grad}}} 
+\newcommand{\appeq}{\backsimeq}
+\newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
+\newcommand{\LT}[1]{\mathcal{L}\qty{#1}}
+\newcommand{\BLT}[1]{\mathcal{B}\qty{#1}}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2}
+\newcommand{\tf}{\;\therefore\;}
+\newcommand{\bc}{\;\because\;}
+\renewcommand{\Tr}[1]{\mathrm{Tr}\qty(#1)}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\eqdef}{\overset{\text{def}}{=}}
+\newcommand{\qeq}{\overset{\text{?}}{=}}
