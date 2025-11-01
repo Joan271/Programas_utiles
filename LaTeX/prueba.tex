@@ -3,11 +3,16 @@
 \settitle[autor][asignatura]{Titulo}
 \begin{document}
 \maketitle
-Hello
-\begin{equation}
-\begin{cases}
-x = 1\\ 
-x = 2 \implies \text{ No compatibles }
-\end{cases}  
-\end{equation}
+\brightmode
+\begin{tabularx}{\texwidth}{@{}x{\quad}x@{}}
+  \begin{minipage}{\linewidth} 
+ \begin{align*}
+ E = mc^{2}
+ \end{align*} 
+  \end{minipage}
+  &
+  \begin{minipage}{\linewidth} 
+    Hola que haces?
+  \end{minipage}
+\end{tabularx}
 \end{document}
