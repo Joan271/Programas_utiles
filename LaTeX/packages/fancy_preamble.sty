@@ -1,4 +1,4 @@
-\ProvidesPackage{fancy_preamble}[2025/10/17 Mi preámbulo personalizado]
+\ProvidesPackage{packages/fancy_preamble}[2025/10/17 Mi preámbulo personalizado]
 
 %% CODIFICACIÓN Y IDIOMA
 \RequirePackage[utf8]{inputenc}
@@ -6,6 +6,10 @@
 \decimalpoint
 %% MATEMÁTICAS y FISICA
 \RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx}
+\ExplSyntaxOn
+% redirige el mensaje 'physics-pkg' del módulo 'siunitx' a 'none' (suprime)
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
 \RequirePackage[h]{esvect} % vectores ajustados al contenido
 \newtheorem{theorem}{Teorema}[section]
 \newtheorem{proposition}{Proposición}[section]
@@ -126,13 +130,13 @@
     \pagecolor{black}
     \color{white}
     \pagestyle{oscuroi}
-    \captionsetup[figure]{style=figura_oscuro_custom}
-    \captionsetup[table]{style=tabla_oscuro_custom}
+    \captionsetup*[figure]{style=figura_oscuro_custom}
+    \captionsetup*[table]{style=tabla_oscuro_custom}
     \hypersetup{
-        colorlinks=true,
-        linkcolor=cyan, citecolor=cyan, filecolor=magenta, urlcolor=cyan,
-        pdfpagemode=FullScreen,
-        linktocpage=false
+        linkcolor=cyan, 
+        citecolor=cyan, 
+        filecolor=magenta,
+        urlcolor=cyan,
     }
 }
 
@@ -140,13 +144,13 @@
     \pagecolor{white}
     \color{black}
     \pagestyle{claroi}
-    \captionsetup[figure]{style=figura_claro_custom}
-    \captionsetup[table]{style=tabla_claro_custom}
+    \captionsetup*[figure]{style=figura_claro_custom}
+    \captionsetup*[table]{style=tabla_claro_custom}
     \hypersetup{
-        colorlinks=true,
-        linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
-        pdfpagemode=FullScreen,
-        linktocpage=false
+        linkcolor=blue, 
+        citecolor=blue, 
+        filecolor=magenta, 
+        urlcolor=blue,
     }
 }
 
