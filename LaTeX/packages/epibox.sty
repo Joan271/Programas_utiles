@@ -1,0 +1,79 @@
+\ProvidesPackage{epibox}
+\RequirePackage{tcolorbox}
+\RequirePackage{etoolbox}
+
+\tcbuselibrary{breakable}
+
+% --------------------------------------------------
+% Base style
+% --------------------------------------------------
+\tcbset{
+  epi/.style={
+    enhanced,
+    breakable,
+    colback=white,
+    boxrule=0.5pt,
+    arc=1mm,
+    before skip=2mm,
+    after skip=2mm,
+    width=\linewidth,
+    fonttitle=\bfseries,
+  }
+}
+
+% --------------------------------------------------
+% Epistemic environments
+% --------------------------------------------------
+
+\newtcolorbox[list inside=known]{known}[1][]{
+  epi,
+  colframe=green!50!black,
+  title=Known,
+  #1
+}
+
+\newtcolorbox[list inside=unclear]{unclear}[1][]{
+  epi,
+  colframe=yellow!60!black,
+  title=Unclear,
+  #1
+}
+
+\newtcolorbox[list inside=questions]{question}[1][]{
+  epi,
+  colframe=red!60!black,
+  title=Question,
+  #1
+}
+
+\newtcolorbox[list inside=claims]{claim}[2][]{
+  epi,
+  colframe=blue!60!black,
+  title={Claim: #2},
+  #1
+}
+
+\newtcolorbox[list inside=pitfalls]{pitfall}[1][]{
+  epi,
+  colframe=purple!60!black,
+  title=Pitfall,
+  #1
+}
+
+\newtcolorbox{epibox}[1][]{
+  epi,
+  colframe=gray!60!black,
+  title=Note,
+  #1
+}
+
+% --------------------------------------------------
+% Lists
+% --------------------------------------------------
+
+\newcommand{\listofknown}{\tcblistof{known}{List of Known Results}}
+\newcommand{\listofunclear}{\tcblistof{unclear}{List of Unclear Points}}
+\newcommand{\listofquestions}{\tcblistof{questions}{List of Open Questions}}
+\newcommand{\listofclaims}{\tcblistof{claims}{List of Claims}}
+\newcommand{\listofpitfalls}{\tcblistof{pitfalls}{List of Pitfalls}}
+\newcommand{\listofepibox}{\tcblistof{epibox}{List of Notes}}
