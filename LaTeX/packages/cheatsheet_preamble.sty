@@ -1,0 +1,40 @@
+\ProvidesPackage{packages/cheat_sheet_v2}[05/03/2026 Preambulo cheatsheet]
+\RequirePackage[utf8]{inputenc}
+
+%% MATEMÁTICAS y FISICA
+\RequirePackage{amsfonts, amssymb, mathtools, physics, mathrsfs, amsthm, empheq, siunitx, tensor, cancel, bm, extarrows}
+%% nccmath rompe con shortintertext de mathtools
+\RequirePackage[version=4]{mhchem}
+\ExplSyntaxOn
+% redirige el mensaje 'physics-pkg' del módulo 'siunitx' a 'none' (suprime)
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\RequirePackage[b]{esvect} % vectores ajustados al contenido
+
+%% FIGURAS Y TABLAS
+\RequirePackage{graphicx, float, wrapfig, caption, subcaption, array, tabularx, multirow, longtable, xcolor}
+\RequirePackage[margin=0.3cm]{geometry}
+
+%% DOCUMENTO Y FORMATO
+\RequirePackage{setspace, ragged2e, fancyhdr, parskip, multicol, sidecap, ifthen, xparse, hyperref, appendix, anyfontsize}
+\RequirePackage[shortlabels, inline]{enumitem} % shortlabels para usar [i), a), 1)] en vez de \Alph*, \alph*, \arabic* en los entornos de listas, inline para usar \begin{enumerate*}...\end{enumerate*} para listas en línea e.g. (a) texto (b) texto (c) texto
+
+%% COMANDOS MATEMÁTICOS
+\DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
+\DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
+\DeclareMathOperator{\sign}{\textrm{sign}}
+\renewcommand{\grad}{\textrm{\textbf{grad}}} 
+\newcommand{\appeq}{\backsimeq}
+\newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
+\newcommand{\LT}[1]{\mathcal{L}\qty{#1}}
+\newcommand{\BLT}[1]{\mathcal{B}\qty{#1}}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2}
+\newcommand{\tf}{\;\therefore\;}
+\newcommand{\bc}{\;\because\;}
+\renewcommand{\Tr}[1]{\mathrm{Tr}\qty(#1)}
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}
+\newcommand{\eqdef}{\overset{\text{def}}{=}}
+\newcommand{\qeq}{\overset{\text{?}}{=}}
+\newcommand{\cte}{\mathrm{cte}}
