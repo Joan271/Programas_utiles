@@ -23,6 +23,7 @@
 \RequirePackage[shortlabels, inline]{enumitem} % shortlabels para usar [i), a), 1)] en vez de \Alph*, \alph*, \arabic* en los entornos de listas, inline para usar \begin{enumerate*}...\end{enumerate*} para listas en línea e.g. (a) texto (b) texto (c) texto
 
 %% ENTORNOS DE TEOREMAS
+%%TODO: Change the names so that they change with the language. Look at Gemini code for that. 
 \renewcommand*{\proofname}{\normalfont\bfseries Proof}
 \RequirePackage{thmtools} 
 
@@ -242,6 +243,7 @@
 \newcommand{\eqdef}{\overset{\text{def}}{=}}
 \newcommand{\qeq}{\overset{\text{?}}{=}}
 \newcommand{\cte}{\mathrm{cte}}
+\newcommand{\diag}[1]{\mathrm{diag}\qty(#1)}
 %% ===========================
 %% COMANDO RESOLUCIÓN
 %% ===========================
