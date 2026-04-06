@@ -5,11 +5,17 @@
 \decimalpoint
 %% MATEMÁTICAS y FISICA
 \RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx}
-\RequirePackage[h]{esvect} % vectores ajustados al contenido
 \RequirePackage[version=4]{mhchem}
+\ExplSyntaxOn
+% redirige el mensaje 'physics-pkg' del módulo 'siunitx' a 'none' (suprime)
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+\RequirePackage[b]{esvect} % vectores ajustados al contenido
+\let\vec\mathbf % display vectors in bold instead of with an arrow
 
 \DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
 \DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
+\DeclareMathOperator{\sign}{\textrm{sign}}
 \renewcommand{\grad}{\textrm{\textbf{grad}}} 
 \newcommand{\appeq}{\backsimeq}
 \newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
@@ -24,3 +30,5 @@
 \newcommand{\down}{\downarrow}
 \newcommand{\eqdef}{\overset{\text{def}}{=}}
 \newcommand{\qeq}{\overset{\text{?}}{=}}
+\newcommand{\cte}{\mathrm{cte}}
+\newcommand{\diag}[1]{\mathrm{diag}\qty(#1)}
