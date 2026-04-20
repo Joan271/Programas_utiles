@@ -3,7 +3,7 @@
 %% CODIFICACIÓN Y IDIOMA
 \RequirePackage[utf8]{inputenc}
 %\RequirePackage[spanish]{babel}
-
+\RequirePackage[T1]{fontenc} 
 %% MATEMÁTICAS y FISICA
 \RequirePackage{amsfonts, amssymb, mathtools, physics, mathrsfs, amsthm, empheq, siunitx, tensor, cancel, bm, extarrows}
 %% nccmath rompe con shortintertext de mathtools
@@ -23,10 +23,8 @@
 \RequirePackage[shortlabels, inline]{enumitem} % shortlabels para usar [i), a), 1)] en vez de \Alph*, \alph*, \arabic* en los entornos de listas, inline para usar \begin{enumerate*}...\end{enumerate*} para listas en línea e.g. (a) texto (b) texto (c) texto
 
 %% ENTORNOS DE TEOREMAS
-%%TODO: Change the names so that they change with the language. Look at Gemini code for that. 
-\renewcommand*{\proofname}{\normalfont\bfseries Proof}
 \RequirePackage{thmtools} 
-
+\providecommand{\prooffname}{Proof}
  \providecommand{\theoremname}{Theorem} 
  \providecommand{\definitionname}{Definition}
  \providecommand{\lemmaname}{Lemma}
@@ -39,6 +37,7 @@
  \providecommand{\notename}{Note}
 
   %ESPAÑOL
+\addto\captionsspanish{\def\prooffname{Demostración}} 
 \addto\captionsspanish{\def\problemname{Problema}} 
 \addto\captionsspanish{\def\theoremname{Teorema}} 
 \addto\captionsspanish{\def\definitionname{Definición}} 
@@ -50,6 +49,7 @@
 \addto\captionsspanish{\def\examplename{Ejemplo}}
 \addto\captionsspanish{\def\notename{Nota}}
   %ENGLISH
+\addto\captionsenglish{\def\prooffname{Proof}} 
 \addto\captionsenglish{\def\problemname{Problem}} 
 \addto\captionsenglish{\def\theoremnname{Theorem}}
 \addto\captionsenglish{\def\definitionname{Definition}}
@@ -61,6 +61,7 @@
 \addto\captionsenglish{\def\examplename{Example}}
 \addto\captionsenglish{\def\notename{Note}}
 
+\renewcommand*{\proofname}{\normalfont\bfseries \prooffname}
 %% define environments
 \declaretheorem[style=definition, name=\protect\theoremname, numbered=yes, numberwithin=section]{theorem}
 \declaretheorem[style=definition, name=\protect\theoremname, numbered=no]{theorem*}

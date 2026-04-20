@@ -1,0 +1,118 @@
+%% ===========================
+%% TITLE AND AUTHOR
+%% ===========================
+\NewDocumentCommand{\settitle}{O{0} O{0} m}{ % [autor][asignatura]{título}
+    \ifthenelse{\equal{#1}{0}}{}{\author{#1}}
+    \ifthenelse{\equal{#2}{0}}
+        {\date{\vspace*{1em}\hrule\vspace*{1em}}}
+        {\date{\Large{UAM - #2}\vspace*{1em}\hrule\vspace*{1em}}}
+    \title{\Huge \textbf{#3}}
+}
+
+%% ===========================
+%% FORMATO DE PÁGINA
+%% ===========================
+\newcommand{\rightheader}{} 
+\newcommand{\setrightheader}[1]{%
+  \renewcommand{\rightheader}{#1}
+}
+\NewDocumentCommand{\setformat}{O{0.8\textwidth} O{centering} m}{
+    % [ancho de figuras][alineación]{cabecera derecha}
+  \renewcommand{\rightheader}{#3}
+    % Estilo claro
+    \fancypagestyle{claroi}{
+        \fancyhf{}
+        \fancyhead[L]{\color{black}\textsc{UAM}}
+        \fancyhead[R]{\color{black}\textsc{\rightheader}}
+        \fancyfoot[C]{\color{black}\thepage}
+        \setlength{\headheight}{18pt}
+        \renewcommand{\headrulewidth}{0.75pt}
+        \renewcommand{\headruleskip}{-0.5em}
+        \renewcommand{\headrule}{\hbox to\headwidth{\color{black}\leaders\hrule height \headrulewidth\hfill}}
+        \renewcommand{\footrulewidth}{0pt}
+    }
+
+    % Estilo oscuro
+    \fancypagestyle{oscuroi}{
+        \fancyhf{}
+        \fancyhead[L]{\color{white}\textsc{UAM}}
+        \fancyhead[R]{\color{white}\textsc{\rightheader}}
+        \fancyfoot[C]{\color{white}\thepage}
+        \renewcommand{\headrulewidth}{0.75pt}
+        \renewcommand{\headruleskip}{-0.5em}
+        \renewcommand{\headrule}{\hbox to\headwidth{\color{white}\leaders\hrule height \headrulewidth\hfill}}
+        \renewcommand{\footrulewidth}{0pt}
+    }
+
+    % Estilos de captions personalizados
+    \DeclareCaptionStyle{figura_claro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=black, small},
+        name=Fig.,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{figura_oscuro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=white, small},
+        name=Fig.,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{tabla_claro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=black, small},
+        name=Tabla,
+        width=#1
+    }
+
+    \DeclareCaptionStyle{tabla_oscuro_custom}{
+        format=format1,
+        justification=#2,
+        font={color=white, small},
+        name=Tabla,
+        width=#1
+    }
+
+    % hipersetup general
+    \hypersetup{
+        colorlinks=true,
+        linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+        pdfpagemode=FullScreen,
+        linktocpage=false
+    }
+    \urlstyle{same}
+}
+%% ===========================
+%% MODOS CLARO Y OSCURO
+%% ===========================
+\def\darkmode{
+    \pagecolor{black}
+    \color{white}
+    \pagestyle{oscuroi}
+    \captionsetup*[figure]{style=figura_oscuro_custom}
+    \captionsetup*[table]{style=tabla_oscuro_custom}
+    \hypersetup{
+        linkcolor=cyan, 
+        citecolor=cyan, 
+        filecolor=magenta,
+        urlcolor=cyan,
+    }
+}
+
+\def\brightmode{
+    \pagecolor{white}
+    \color{black}
+    \pagestyle{claroi}
+    \captionsetup*[figure]{style=figura_claro_custom}
+    \captionsetup*[table]{style=tabla_claro_custom}
+    \hypersetup{
+        linkcolor=blue, 
+        citecolor=blue, 
+        filecolor=magenta, 
+        urlcolor=blue,
+    }
+}

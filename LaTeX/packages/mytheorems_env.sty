@@ -1,0 +1,135 @@
+\ProvidesPackage{packages/mytheorems_env}[2024/06/01 Custom theorem environments with tcolorbox]
+%% ENTORNOS DE TEOREMAS
+\RequirePackage{thmtools,xcolor} 
+\RequirePackage[dvipsnames]{xcolor} % para usar colores predefinidos como RoyalPurple, NavyBlue, etc. en los entornos de teoremas
+\providecommand{\prooffname}{Proof}
+ \providecommand{\theoremname}{Theorem} 
+ \providecommand{\definitionname}{Definition}
+ \providecommand{\lemmaname}{Lemma}
+ \providecommand{\corollaryname}{Corollary}
+ \providecommand{\claimname}{Claim}
+ \providecommand{\propositionname}{Proposition}
+ \providecommand{\remarkname}{Remark} 
+ \providecommand{\examplename}{Example}
+ \providecommand{\problemname}{Problem}
+ \providecommand{\notename}{Note}
+
+  %ESPAÑOL
+\addto\captionsspanish{\def\prooffname{Demostración}} 
+\addto\captionsspanish{\def\problemname{Problema}} 
+\addto\captionsspanish{\def\theoremname{Teorema}} 
+\addto\captionsspanish{\def\definitionname{Definición}} 
+\addto\captionsspanish{\def\lemmaname{Lema}}
+\addto\captionsspanish{\def\corollaryname{Corolario}}
+\addto\captionsspanish{\def\claimname{Afirmación}}
+\addto\captionsspanish{\def\propositionname{Proposición}}
+\addto\captionsspanish{\def\remarkname{Observación}}
+\addto\captionsspanish{\def\examplename{Ejemplo}}
+\addto\captionsspanish{\def\notename{Nota}}
+  %ENGLISH
+\addto\captionsenglish{\def\prooffname{Proof}} 
+\addto\captionsenglish{\def\problemname{Problem}} 
+\addto\captionsenglish{\def\theoremnname{Theorem}}
+\addto\captionsenglish{\def\definitionname{Definition}}
+\addto\captionsenglish{\def\lemmaname{Lemma}}
+\addto\captionsenglish{\def\corollaryname{Corollary}}
+\addto\captionsenglish{\def\claimname{Claim}}
+\addto\captionsenglish{\def\propositionname{Proposition}}
+\addto\captionsenglish{\def\remarkname{Remark}}
+\addto\captionsenglish{\def\examplename{Example}}
+\addto\captionsenglish{\def\notename{Note}}
+
+\renewcommand*{\proofname}{\normalfont\bfseries \prooffname}
+%% define environments
+\declaretheorem[style=definition, name=\protect\theoremname, numbered=yes, numberwithin=section]{theorem}
+\declaretheorem[style=definition, name=\protect\theoremname, numbered=no]{theorem*}
+
+\declaretheorem[style=plain, name=\protect\propositionname, numbered=yes, sibling=theorem]{proposition}
+\declaretheorem[style=plain, name=\protect\propositionname, numbered=no]{proposition*}
+
+\declaretheorem[style=definition, name=\protect\corollaryname, numbered=yes, sibling=theorem]{corollary}
+\declaretheorem[style=definition, name=\protect\corollaryname, numbered=no]{corollary*}
+
+\declaretheorem[style=definition, name=\protect\lemmaname, numbered=yes, sibling=theorem]{lemma}
+\declaretheorem[style=plain, name=\protect\lemmaname, numbered=no]{lemma*}
+
+\declaretheorem[style=definition, name=\protect\claimname, numbered=yes, sibling=theorem]{claim}
+\declaretheorem[style=plain, name=\protect\claimname, numbered=no]{claim*}
+
+\declaretheorem[style=definition, name=\protect\definitionname, numbered=yes, numberwithin=section]{definition}
+\declaretheorem[style=definition, name=\protect\definitionname, numbered=no]{definition*}
+
+\declaretheorem[style=definition, name=\protect\examplename, numbered=yes, numberwithin=section]{example}
+\declaretheorem[style=definition, name=\protect\examplename, numbered=no]{example*}
+
+
+\declaretheorem[style=remark, name=Remark, numbered=yes, numberwithin=section]{remark}
+\declaretheorem[style=remark, name=Remark, numbered=no]{remark*}
+
+\declaretheoremstyle[headfont=\color{blue!80}\bfseries, bodyfont=\normalfont, spaceabove=3pt, spacebelow=3pt]{notestyle}
+
+\declaretheorem[style=notestyle, name=Note, numbered=yes, numberwithin=section]{note}
+\declaretheorem[style=notestyle, name=Note, numbered=no]{note*}
+
+\declaretheoremstyle[headfont=\bfseries, bodyfont=\normalfont, spaceabove=3pt, spacebelow=3pt, qed=\ensuremath{\square}]{solutionstyle}
+
+\declaretheoremstyle[
+ headfont=\normalfont\bfseries, 
+ bodyfont=\normalfont, 
+ notefont=\normalfont\bfseries, 
+ notebraces={}{}, 
+ headpunct = { }, 
+ postheadspace = \newline, 
+ spaceabove=3pt, 
+ spacebelow=3pt]{problemstyle} 
+
+
+\declaretheorem[style=problemstyle, name=\protect\problemname, numbered=yes, numberwithin=section]{problem}
+\declaretheorem[style=problemstyle, name=\protect\problemname, numbered=no]{problem*}
+
+\declaretheorem[style=solutionstyle, name=Solution, numbered=yes, numberwithin=section]{solution}
+\declaretheorem[style=solutionstyle, name=Solution, numbered=no]{solution*}
+
+
+ 
+
+
+\usepackage[most]{tcolorbox}
+
+\newcommand{\newtcbenvironment}[2]{
+    \tcolorboxenvironment{#1}{#2, enhanced, breakable, sharp corners,leftrule=2pt, rightrule=0pt, toprule=0pt, bottomrule=0pt}
+    \tcolorboxenvironment{#1*}{#2, enhanced, breakable, rounded corners,leftrule=2pt, rightrule=0pt, toprule=0pt, bottomrule=0pt}
+}
+
+%% define styles
+
+\newtcbenvironment{theorem}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{proposition}{colframe=RoyalPurple, colback=RoyalPurple!8}
+\newtcbenvironment{corollary}{colframe=NavyBlue, colback=SkyBlue!8}
+\newtcbenvironment{lemma}{colframe=NavyBlue, colback=SkyBlue!8}
+\newtcbenvironment{claim}{colframe=NavyBlue, colback=SkyBlue!8}
+
+\newtcbenvironment{definition}{colframe=ForestGreen, colback=ForestGreen!5}
+\newtcbenvironment{example}{colframe=RawSienna, colback=RawSienna!5}
+\newtcbenvironment{problem}{colframe=WildStrawberry!30, colback=ForestGreen!2}
+
+%% cbox
+\newtcolorbox{cbox}[1][]{%
+    enhanced,
+    breakable,
+    sharp corners,
+    leftrule=2pt, rightrule=0pt, toprule=0pt, bottomrule=0pt,
+    colframe=SkyBlue,
+    colback=SkyBlue!8,
+    #1
+}
+
+%% ===========================
+%% RESOLUTION COMMAND
+%% ===========================
+\newcommand{\Resolucion}{
+    \vspace*{1em}
+    \hrule
+    \vspace*{1em}
+    {\color{blue} Resolución:}\\
+}

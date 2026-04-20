@@ -1,0 +1,125 @@
+\ProvidesPackage{packages/tfg_layout}[2024/06/01 Custom layout for TFG documents]
+\RequirePackage{pgfkeys, graphicx, caption, subcaption, fancyhdr,ifthen,hyperref,float, xcolor} 
+%% ===========================
+%% TITLE AND AUTHOR
+%% ===========================
+
+%% ==========================
+%% CAPTIONS
+%% ==========================
+
+\DeclareCaptionFormat{format1}{\textbf{#1#2}#3}
+\DeclareCaptionFormat{format2}{\textsc{#1#2}#3}
+\DeclareCaptionLabelSeparator{parenthesis}{$)\,$}
+
+\DeclareCaptionStyle{subfigure}{format=format1, justification=raggedright, labelsep=parenthesis, font={huge}}
+\DeclareCaptionStyle{subfigure2}{format=format1, justification=raggedright, labelsep=parenthesis, font={Large}}
+
+\DeclareCaptionStyle{figure_1}{
+        format=format1,
+        justification=centering,
+        font={small},
+        name=Fig.,
+        width=0.8\textwidth
+}
+
+\DeclareCaptionStyle{table_1}{
+        format=format1,
+        justification=centering,
+        font={small},
+        name=Tabla,
+        width=0.8\textwidth
+}
+
+
+%% ===========================
+%% PAGE LAYOUT
+%% ===========================
+\makeatletter
+ % -- Institution info --- %
+ \pgfkeys{
+   /inst/.is family, /inst, 
+   name/.estore in=\inst@name, %saves name in \inst@name
+   logo/.estore in=\inst@logo, %saves path to logo in \inst@logo
+   name={}, 
+   logo={}  %default values
+ } 
+
+ % -- Page Layout --% 
+ \newif\if@layout@showlogo %boolean variable to control logo display in pages
+ \pgfkeys{ 
+    /layout/.is family, /layout, 
+    logo/.is choice, 
+    logo/true/.code={\@layout@showlogotrue},
+    logo/false/.code={\@layout@showlogofalse},
+    logo/.default=false, %default value
+    rightheader/.estore in=\@layout@rightheader, %saves right header text in \@layout@rightheader
+    rightheader={}, %default value
+    pagestyle/.gdef\@layout@pagestyle, %saves page style in \@layout@pagestyle
+    pagestyle={academic}, %default value
+    figurestyle/.gdef\@layout@figurestyle, %saves figure caption style in \@layout@figurestyle
+    figurestyle={figure_1}, %default value
+    tablestyle/.gdef\@layout@tablestyle, %saves table caption style in \@layout@tablestyle
+    tablestyle={table_1} %default value
+ } 
+
+ \newcommand{\institution}[1]{\pgfkeys{/inst/.cd,#1}} %command to set institution info
+ \newcommand{\pagelayout}[1]{\pgfkeys{/layout/.cd,#1}} %command to set page layout options
+\fancypagestyle{academic}{
+    \fancyhf{}
+    \fancyhead[L]{
+    \if@layout@showlogo
+      \ifx\inst@logo\@empty
+        % No logo provided, do nothing
+      \else
+        \includegraphics[height=0.6cm]{\inst@logo} % Adjust height as needed
+      \fi 
+    \else 
+      \inst@name % Display institution name if logo is not shown
+    \fi
+  }
+  \fancyhead[R]{\textsc{\@layout@rightheader}}
+    \fancyfoot[C]{\thepage}
+    \setlength{\headheight}{18pt}
+    \renewcommand{\headrulewidth}{0.75pt}
+    \renewcommand{\headruleskip}{-0.5em}
+    \renewcommand{\headrule}{\hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}}
+    \renewcommand{\footrulewidth}{0pt}
+} 
+ \AtBeginDocument{ 
+  \pagestyle{\@layout@pagestyle} % Set the page style based on the layout configuration
+  \captionsetup*[figure]{style=\@layout@figurestyle}
+  \captionsetup*[table]{style=\@layout@tablestyle}
+}
+\newcommand{\checkkeys}{
+  \begin{itemize}
+    \item Nombre Inst: \inst@name
+    \item Logo Path: \inst@logo
+    \item Right Header: \@layout@rightheader
+    \item Estilo Figura: \@layout@figurestyle
+  \end{itemize}
+}
+
+\makeatother
+
+\def\resetnumpagetitle{
+    \thispagestyle{empty}
+    \newpage
+    \setcounter{page}{1}
+}
+
+%% ===========================
+%% HYPERREF CONFIGURATION
+%% ===========================
+ \hypersetup{
+      colorlinks=true,
+      linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+      pdfpagemode=FullScreen,
+      linktocpage=false, 
+      linkcolor=blue, 
+      citecolor=blue, 
+      filecolor=magenta, 
+      urlcolor=blue,
+  }
+  \urlstyle{same}
+

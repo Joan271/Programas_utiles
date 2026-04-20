@@ -1,0 +1,22 @@
+\ProvidesPackage{packages/mygeneral}[17/04/26 v1.0 My general package for physics and math]
+%% CODIFICATION
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc} 
+%% MATHS and PHYSICS
+\RequirePackage{amsfonts, amssymb, mathtools, physics, mathrsfs, amsthm, empheq, siunitx, tensor, cancel, bm, extarrows}
+%% I haven't called nccmath since it breaks with the shortintertext of mathtools
+\RequirePackage[version=4]{mhchem} % nuclear dn chemistry formulas
+\ExplSyntaxOn
+% redirects message 'physics-pkg' of 'siunitx' to 'none' (suprime)
+\msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
+\ExplSyntaxOff
+
+\RequirePackage[b]{esvect} % in case you want to use another type of arrows for vectors. Use it under \vv
+
+%% FIGURES AND TABLES
+\RequirePackage{graphicx, float, wrapfig, caption, subcaption, array, tabularx, multirow, longtable, xcolor}
+\RequirePackage[a4paper, margin=2cm]{geometry}
+
+%% DOCUMENT AND LAYOUT
+\RequirePackage{setspace, ragged2e, fancyhdr, parskip, multicol, sidecap, ifthen, xparse, hyperref, appendix, anyfontsize}
+\RequirePackage[shortlabels, inline]{enumitem} % shortlabels para usar [i), a), 1)] en vez de \Alph*, \alph*, \arabic* en los entornos de listas, inline para usar \begin{enumerate*}...\end{enumerate*} para listas en línea e.g. (a) texto (b) texto (c) texto
