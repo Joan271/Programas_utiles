@@ -1,6 +1,6 @@
 \ProvidesPackage{packages/mytheorems_env}[2024/06/01 Custom theorem environments with tcolorbox]
 %% ENTORNOS DE TEOREMAS
-\RequirePackage{thmtools,xcolor} 
+\RequirePackage{thmtools} 
 \RequirePackage[dvipsnames]{xcolor} % para usar colores predefinidos como RoyalPurple, NavyBlue, etc. en los entornos de teoremas
 \providecommand{\prooffname}{Proof}
  \providecommand{\theoremname}{Theorem} 
@@ -13,6 +13,7 @@
  \providecommand{\examplename}{Example}
  \providecommand{\problemname}{Problem}
  \providecommand{\notename}{Note}
+ \providecommand{\solutionname}{Solution} 
 
   %ESPAÑOL
 \addto\captionsspanish{\def\prooffname{Demostración}} 
@@ -26,10 +27,11 @@
 \addto\captionsspanish{\def\remarkname{Observación}}
 \addto\captionsspanish{\def\examplename{Ejemplo}}
 \addto\captionsspanish{\def\notename{Nota}}
+\addto\captionsspanish{\def\solutionname{Solución}}
   %ENGLISH
 \addto\captionsenglish{\def\prooffname{Proof}} 
 \addto\captionsenglish{\def\problemname{Problem}} 
-\addto\captionsenglish{\def\theoremnname{Theorem}}
+\addto\captionsenglish{\def\theoremname{Theorem}}
 \addto\captionsenglish{\def\definitionname{Definition}}
 \addto\captionsenglish{\def\lemmaname{Lemma}}
 \addto\captionsenglish{\def\corollaryname{Corollary}}
@@ -38,6 +40,7 @@
 \addto\captionsenglish{\def\remarkname{Remark}}
 \addto\captionsenglish{\def\examplename{Example}}
 \addto\captionsenglish{\def\notename{Note}}
+\addto\captionsenglish{\def\solutionname{Solution}}
 
 \renewcommand*{\proofname}{\normalfont\bfseries \prooffname}
 %% define environments
@@ -80,7 +83,7 @@
  bodyfont=\normalfont, 
  notefont=\normalfont\bfseries, 
  notebraces={}{}, 
- headpunct = { }, 
+ headpunct ={}, 
  postheadspace = \newline, 
  spaceabove=3pt, 
  spacebelow=3pt]{problemstyle} 
@@ -92,6 +95,7 @@
 \declaretheorem[style=solutionstyle, name=Solution, numbered=yes, numberwithin=section]{solution}
 \declaretheorem[style=solutionstyle, name=Solution, numbered=no]{solution*}
 
+\declaretheorem[style=problemstyle, name=, numbered=no]{raw}
 
  
 
@@ -112,6 +116,7 @@
 \newtcbenvironment{claim}{colframe=NavyBlue, colback=SkyBlue!8}
 \newtcbenvironment{remark}{colframe=Grey, colback=SkyBlue!8} 
 \newtcbenvironment{definition}{colframe=ForestGreen, colback=ForestGreen!5}
+\newtcbenvironment{raw}{colframe=NavyBlue, colback=SkyBlue!8}
 \newtcbenvironment{example}{colframe=RawSienna, colback=RawSienna!5}
 \newtcbenvironment{problem}{colframe=WildStrawberry!30, colback=ForestGreen!2}
 
@@ -129,9 +134,9 @@
 %% ===========================
 %% RESOLUTION COMMAND
 %% ===========================
-\newcommand{\Resolucion}{
+\newcommand{\Solution}{
     \vspace*{1em}
     \hrule
     \vspace*{1em}
-    {\color{blue} Resolución:}\\
+    {\color{blue} \protect\solutionname:}\\
 }
