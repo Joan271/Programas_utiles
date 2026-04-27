@@ -1,13 +1,11 @@
 \ProvidesPackage{packages/mycommands}[2024/06/01 Custom commands for physics and math]
 %% COMMANDS
-\DeclareMathOperator{\rot}{\textrm{\textbf{rot}}}
-\DeclareMathOperator{\diver}{\textrm{\textbf{div}}}
-\DeclareMathOperator{\sign}{\textrm{sign}}
-\renewcommand{\grad}{\textrm{\textbf{grad}}} 
-\newcommand{\appeq}{\backsimeq}
+\DeclareMathOperator{\rot}{\textrm{\mathbf{rot}}}
+\DeclareMathOperator{\diver}{\textrm{\mathbf{div}}}
+\DeclareMathOperator{\sign}{\mathrm{sign}}
+\renewcommand{\grad}{\textrm{\mathbf{grad}}} 
 \newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
 \newcommand{\LT}[1]{\mathcal{L}\qty{#1}}
-\newcommand{\BLT}[1]{\mathcal{B}\qty{#1}}
 \newcommand{\mean}[1]{\left\langle #1 \right\rangle}
 \newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2}
 \newcommand{\tf}{\;\therefore\;}
