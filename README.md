@@ -31,6 +31,56 @@ Symbols for quantum mechanics/reasoning:
 - \up for an up arrow. 
 - \down for a down arrow. 
 
+### Mygeneral
+Includes a list of frequently used packages. 
+
+CODIFICATION
+- inputenc \[utf8\]
+- fontenc \[T1\]
+
+MATHS and PHYSICS
+- amsfonts
+- amssymb
+- mathtools
+- physics
+- mathrsfs
+- amsthm
+- empheq
+- siunitx
+- tensor
+- cancel
+- bm
+- extarrows
+- mhchem \[version=4\] (for compatibility)
+- esvect \[b\] (selects a default type of arrow)
+
+FIGURES AND TABLES
+- graphicx
+- float
+- wrapfig
+- caption
+- subcaption
+- array
+- tabularx
+- multirow
+- longtable
+- xcolor
+- geometry \[a4paper, margin=2cm\]
+
+DOCUMENT AND LAYOUT
+- setspace
+- ragged2e
+- fancyhdr
+- parskip
+- multicol
+- sidecap
+- ifthen
+- xparse
+- hyperref
+- appendix
+- anyfontsize
+- enumitem \[shortlabels, inline\] (allows using keys as a), i) as optional arguments for enumerate. Also allows inline lists using the starred version of enumerate )
+
 ## Templates 
 
 ## LaTeX conversors
