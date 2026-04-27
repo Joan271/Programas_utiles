@@ -1,19 +1,32 @@
 \ProvidesPackage{packages/mycommands}[2024/06/01 Custom commands for physics and math]
-%% COMMANDS
+% Diferential operators written in bold words
+\renewcommand{\grad}{\textrm{\mathbf{grad}}} 
 \DeclareMathOperator{\rot}{\textrm{\mathbf{rot}}}
 \DeclareMathOperator{\diver}{\textrm{\mathbf{div}}}
-\DeclareMathOperator{\sign}{\mathrm{sign}}
-\renewcommand{\grad}{\textrm{\mathbf{grad}}} 
+
+% Common transforms
 \newcommand{\FT}[1]{\mathcal{F}\qty{#1}}
 \newcommand{\LT}[1]{\mathcal{L}\qty{#1}}
-\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
-\newcommand{\Oterm}[2]{\mathcal{O}\qty(#1)^#2}
+
+% Common matrix operations
+\renewcommand{\Tr}[1]{\mathrm{Tr}\qty(#1)}
+\newcommand{\diag}[1]{\mathrm{diag}\qty(#1)}
+
+% Common logical commands 
 \newcommand{\tf}{\;\therefore\;}
 \newcommand{\bc}{\;\because\;}
-\renewcommand{\Tr}[1]{\mathrm{Tr}\qty(#1)}
-\newcommand{\up}{\uparrow}
-\newcommand{\down}{\downarrow}
 \newcommand{\eqdef}{\overset{\text{def}}{=}}
 \newcommand{\qeq}{\overset{\text{?}}{=}}
-\newcommand{\cte}{\mathrm{cte}}
-\newcommand{\diag}[1]{\mathrm{diag}\qty(#1)}
+
+% Other common symbols in calculus 
+\DeclareMathOperator{\sign}{\mathrm{sign}}
+\newcommand{\mean}[1]{\left\langle #1 \right\rangle}
+\providecommand{\ct}{\mathrm{const} } 
+%Spanish
+\addto\captionsspanish{\def\ct{\mathrm{cte}}}
+%English
+\addto\captionsenglish{\def\ct{\mathrm{const}}}
+
+% Common symbols in quantum mechanics (although it can be used in other contexts, e.g. relations between variables) 
+\newcommand{\up}{\uparrow}
+\newcommand{\down}{\downarrow}

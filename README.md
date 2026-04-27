@@ -2,13 +2,35 @@
 This folder includes: 
 ## Packages 
 ### Mycustom 
-Includes my personal math commmands: 
-- \rot for $\textrm{\mathbf{rot}}$
-- \diver for $\textrm{\mathbf{div}}$
-- \sign for $\mathrm{sign}$
-- \FT{·} as a Fourier Transform Operator. Example: \FT{f}: $\mathcal{F}\qty{f}$
-- \LT{·} as a Laplace Transform Operator. Example: \LT{f}: $\mathcal{L}\qty{f}$
-- \mean{·} as the mean value of a quantity. Example: \mean{f}: $\left\langle #1 \right\rangle$ 
+Includes my personal math commmands.  
+Common diferential operators written in bold words:     
+- \rot for the rotational operator. 
+- \diver for the divergence operator.
+- \grad for the gradient operator.
+
+Common transformation symbols: 
+- \FT{·} for the Fourier Transform Operator. 
+- \LT{·} for the Laplace Transform Operator. 
+
+Common matrix operations:
+- \Tr{·} for the trace. 
+- \diag{·} for denoting a diagonal matrix. 
+
+Common logical commands: 
+- \tf for therefore symbol (spacing adjusted). 
+- \bc for because symbol (spacing adjusted). 
+- \eqdef for writing an equal symbol adorned with a def. over it. 
+- \qeq for writing an equal symbol adorned with a '?' over it. 
+
+Other common symbols in calculus: 
+- \sign to denote the sign operation. 
+- \mean{·} for surrounding an expresion with the angle mean symbol. 
+- \ct{·} for displaying a constant text symbol that change according to the language (only spanish and english supported so far). 
+
+Symbols for quantum mechanics/reasoning: 
+- \up for an up arrow. 
+- \down for a down arrow. 
+
 ## Templates 
 
 ## LaTeX conversors
