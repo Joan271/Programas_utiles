@@ -106,8 +106,8 @@ How to install / load
   - Or rename the package to mytheorems_env.sty and (optionally) fix \ProvidesPackage to mytheorems_env, then:
     \usepackage{mytheorems_env}
 
-Minimal usage example
-
+Minimal usage example: 
+```latex
 \documentclass{article}
 \usepackage[spanish]{babel} % or [english]
 \usepackage{packages/mytheorems_env} % path/name as explained above
@@ -136,6 +136,7 @@ A short tip inside a colored box.
 
 \end{document}
 
+```
 ## Templates 
 
 ## LaTeX conversors
