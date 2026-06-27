@@ -1,0 +1,339 @@
+\ProvidesPackage{packages/mylayout}[2024/06/01 Custom layout for documents]
+\RequirePackage{pgfkeys, graphicx, caption, subcaption, fancyhdr,ifthen,hyperref,float, xcolor, titling} 
+%% ===========================
+%% TITLES
+%% ===========================
+
+%Helper functions
+\makeatletter
+\newcommand{\renderifnotempty}[2]{%
+  \edef\@temp{#1}%
+  \if\relax\detokenize\expandafter{\@temp}\relax
+  \else
+    #2%
+  \fi
+}
+%\newcommand{\renderifnotempty}[2]{
+% \ifx#1\@empty 
+% \else 
+%   #2 
+% \fi
+%} 
+\newcommand{\renderpair}[3]{%
+    \edef\@a{#1}%
+    \edef\@b{#2}%
+
+    \if\relax\detokenize\expandafter{\@a}\relax
+        \if\relax\detokenize\expandafter{\@b}\relax
+        \else
+            \@b
+        \fi
+    \else
+        \@a
+        \if\relax\detokenize\expandafter{\@b}\relax
+        \else
+           \;#3\;\@b
+        \fi
+    \fi
+}
+%\newcommand{\renderpair}[3]{%
+%    \ifx#1\@empty
+%        \ifx#2\@empty
+%        \else
+%            #2
+%        \fi
+%    \else
+%        #1
+%        \ifx#2\@empty
+%        \else
+%            #3 #2
+%        \fi
+%    \fi
+%}
+
+%\newcommand{\ifpairnotempty}[3]{%
+%    \ifx#1\@empty
+%        \ifx#2\@empty
+%        \else
+%            #3
+%        \fi
+%    \else
+%        #3
+%    \fi
+%}
+\newcommand{\ifpairnotempty}[3]{%
+    \edef\@a{#1}%
+    \edef\@b{#2}%
+
+    \if\relax\detokenize\expandafter{\@a}\relax
+        \if\relax\detokenize\expandafter{\@b}\relax
+        \else
+            #3%
+        \fi
+    \else
+        #3%
+    \fi
+}
+
+%Keys for title configuration
+\pgfkeys{
+  /title/.is family,
+  /title,
+  theme/.store in=\@title@theme,
+  theme/.initial=assignment,
+  title/.store in=\@title@title,
+  subtitle/.store in=\@title@subtitle,
+  author/.store in=\@title@author,
+  subject/.store in=\@title@subject,
+  supervisor/.store in=\@title@supervisor,
+  date/.store in=\@title@date,
+  academicyear/.store in=\@title@academicyear,
+  projectname/.store in=\@title@projectname,
+  projectsubname/.store in=\@title@projectsubname,
+}
+
+%Default values for title keys
+\pgfkeys{
+ /title/.cd, 
+ title={},
+ subtitle={},
+ author={}, 
+ subject={},
+ supervisor={},
+ date={}, 
+ academicyear={},
+ projectname={},
+ projectsubname={},
+} 
+
+\newcommand{\@rendertitle}{ 
+  \PackageWarning{mylayout}{No title theme selected}
+}  
+\renewcommand{\maketitle}{\@rendertitle} 
+
+% Assignment theme
+\pgfkeys{
+ /title/.cd, 
+ theme/assignment/.code={ 
+   \renewcommand{\@rendertitle}{
+     \thispagestyle{plain} 
+     %========= 
+     % TITLE 
+     %=========
+   \renderifnotempty{\@title@title}{
+    \vspace*{1.5em}
+    \begin{center}
+      \LARGE\bfseries \@title@title
+    \end{center}
+    \vspace{0.7em}
+   }
+    % =========================
+    % AUTOR
+    % =========================
+   \renderifnotempty{\@title@author}{
+    \begin{center}
+      \large\@title@author
+    \end{center}
+    \vspace{0.3em}
+   } 
+   % ==========================
+   % SUBJECT AND INSTITUTION
+   % ==========================
+   \ifpairnotempty{\@title@subject}{\inst@name}{
+    \begin{center}
+      \renderpair{\@title@subject}{\inst@name}{--}
+    \end{center} 
+   } 
+
+    % =========================
+    % DATE
+    % =========================
+   \renderifnotempty{\@title@date}{
+    \begin{center}
+      \@title@date
+    \end{center}
+   }
+   \vspace*{1.5em}
+   \hrule 
+   \vspace*{0.5em} 
+  }
+ } 
+} 
+
+%project theme
+\pgfkeys{
+  /title/.cd, 
+  theme/project/.code={
+    \renewcommand{\@rendertitle}{
+     \begin{titlepage}
+       \centering
+       \renderifnotempty{\inst@logo}{
+         \vspace*{1.5cm} 
+         \includegraphics[width=0.5\textwidth]{\inst@logo}\par
+         \vspace*{1cm}
+       }
+       \renderifnotempty{\@title@projectname}{
+         {\Large\@title@projectname}
+         \renderifnotempty{\@title@projectsubname}
+         {\par\vspace*{0.5em} 
+         {\Large\@title@projectsubname}}
+         \vspace*{1.5cm} 
+       }
+       \renderifnotempty{\@title@title}{
+      \hrule
+       \vspace*{0.5cm} 
+       {\huge\bfseries\@title@title}
+       \renderifnotempty{\@title@subtitle}
+       {\par\vspace*{1em} 
+       {\Large\bfseries\@title@subtitle}}
+       \vspace*{0.75cm} 
+       \hrule
+       \vspace*{0.3cm}
+       }
+       \renderifnotempty{\@title@author}{
+         {\Large by\par\vspace*{0.3cm}}
+      {\Large\@title@author}
+       }
+       \renderifnotempty{\@title@supervisor}{
+       \vfill
+       \raggedright 
+       {\large\textbf{Supervisor:} \@title@supervisor\par}
+       }
+       \renderifnotempty{\@title@academicyear}{
+         {\large\textbf{Academic Year:} \@title@academicyear\par}
+       }
+     \end{titlepage} 
+    }
+  } 
+} 
+\newcommand{\titlesetup}[1]{%
+  \pgfkeys{/title/.cd,#1}%
+  \pgfkeys{/title/theme/\@title@theme}%
+}
+
+\makeatother
+%% ==========================
+%% CAPTIONS
+%% ==========================
+
+\DeclareCaptionFormat{format1}{\textbf{#1#2}#3}
+\DeclareCaptionFormat{format2}{\textsc{#1#2}#3}
+\DeclareCaptionLabelSeparator{parenthesis}{$)\,$}
+
+\DeclareCaptionStyle{subfigure}{format=format1, justification=raggedright, labelsep=parenthesis, font={huge}}
+\DeclareCaptionStyle{subfigure2}{format=format1, justification=raggedright, labelsep=parenthesis, font={Large}}
+
+\DeclareCaptionStyle{figure_1}{
+        format=format1,
+        justification=centering,
+        font={small},
+        name=Fig.,
+        width=0.8\textwidth
+}
+
+\DeclareCaptionStyle{table_1}{
+        format=format1,
+        justification=centering,
+        font={small},
+        name=Tabla,
+        width=0.8\textwidth
+}
+
+
+%% ===========================
+%% PAGE LAYOUT
+%% ===========================
+\makeatletter
+ % -- Institution info --- %
+ \pgfkeys{
+   /inst/.is family, 
+   /inst, 
+   name/.store in=\inst@name, %saves name in \inst@name
+   logo/.store in=\inst@logo, %saves path to logo in \inst@logo
+   name/.inicial={}, 
+   logo/.inicial={}  %default values
+ } 
+
+ % -- Page Layout --% 
+ \newif\if@layout@showlogo %boolean variable to control logo display in pages
+ \pgfkeys{ 
+    /layout/.is family, 
+    /layout, 
+    % ==== PAGESTYLE ==== %
+    pagestyle/.store in=\@layout@pagestyle,
+    pagestyle/.initial=academic, %default page style
+    rightheader/.store in=\@layout@rightheader,
+    rightheader/.initial={}, %default right header text
+    showlogo/.is if=@layout@showlogo, %boolean key to control logo display 
+    showlogo/.default=false, %default value for showlogo
+    % ==== CAPTION STYLES ==== %
+    figurestyle/.store in=\@layout@figurestyle,
+    tablestyle/.store in=\@layout@tablestyle,
+ } 
+ % == Default values == %
+  \pgfkeys{
+    /layout/.cd, 
+    figurestyle=figure_1,
+    tablestyle=table_1
+}
+ \newcommand{\institution}[1]{\pgfkeys{/inst,#1}} %command to set institution info
+ \newcommand{\pagelayout}[1]{\pgfkeys{/layout/.cd,#1}} %command to set page layout options
+\fancypagestyle{academic}{
+    \fancyhf{}
+    \fancyhead[L]{
+    \if@layout@showlogo
+      \ifx\inst@logo\@empty
+        % No logo provided, do nothing
+      \else
+        \includegraphics[height=0.6cm]{\inst@logo} % Adjust height as needed
+      \fi 
+    \else 
+      \inst@name % Display institution name if logo is not shown
+    \fi
+  }
+  \fancyhead[R]{\textsc{\@layout@rightheader}}
+    \fancyfoot[C]{\thepage}
+    \setlength{\headheight}{18pt}
+    \renewcommand{\headrulewidth}{0.75pt}
+    \renewcommand{\headruleskip}{-0.5em}
+    \renewcommand{\headrule}{\hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}}
+    \renewcommand{\footrulewidth}{0pt}
+} 
+ \AtBeginDocument{ 
+  \captionsetup*[figure]{style=\@layout@figurestyle}
+  \captionsetup*[table]{style=\@layout@tablestyle}
+}
+\newcommand{\checkkeys}{
+  \begin{itemize}
+    \item Nombre Inst: \inst@name
+    \item Logo Path: \detokenize\expandafter{\inst@logo}
+    \item Right Header: \@layout@rightheader
+    \item Estilo Figura: \detokenize\expandafter{\@layout@figurestyle}
+    \item Estilo Tabla: \detokenize\expandafter{\@layout@tablestyle}
+    \item Estilo de Titulo: \@title@theme
+  \end{itemize}
+}
+
+\makeatother
+
+\def\resetnumpagetitle{
+    \thispagestyle{empty}
+    \newpage
+    \setcounter{page}{1}
+}
+
+%% ===========================
+%% HYPERREF CONFIGURATION
+%% ===========================
+ \hypersetup{
+      colorlinks=true,
+      linkcolor=blue, citecolor=blue, filecolor=magenta, urlcolor=blue,
+      pdfpagemode=FullScreen,
+      linktocpage=false, 
+      linkcolor=blue, 
+      citecolor=blue, 
+      filecolor=magenta, 
+      urlcolor=blue,
+  }
+  \urlstyle{same}
+

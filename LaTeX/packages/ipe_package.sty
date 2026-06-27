@@ -3,9 +3,10 @@
 \RequirePackage[utf8]{inputenc}
 \RequirePackage[spanish]{babel}
 \decimalpoint
+\RequirePackage{enumitem} 
 %% MATEMÁTICAS y FISICA
-\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx}
-\RequirePackage[version=4]{mhchem}
+\RequirePackage{amsfonts, amssymb, mathtools, nccmath, physics, mathrsfs, amsthm, empheq, amsthm, siunitx, tensor}
+%\RequirePackage[version=4]{mhchem}
 \ExplSyntaxOn
 % redirige el mensaje 'physics-pkg' del módulo 'siunitx' a 'none' (suprime)
 \msg_redirect_name:nnn { siunitx } { physics-pkg } { none }
