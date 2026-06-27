@@ -2,21 +2,32 @@
 \usepackage[select language]{babel} 
 \usepackage{packages/mygeneral}
 %\usepackage{packages/mycommands}
-\usepackage{packages/tfg_layout} 
+\usepackage{packages/mylayout} 
 %\usepackage{packages/mytheorems_env}
 %\usepackage{packages/dangbox} 
 %\usepackage{packages/epibox} 
 %\usepackage[backend=biber, style=numeric, sorting=none]{biblatex} 
 %\addbibresource{bibliography.bib} 
 \institution{
-  %logo=path/to/logo.png,
   %name=name of the institution
+  %logo=path/to/logo
 } 
 \pagelayout{
  %rightheader= whatever you want in the right header,
- %logo=true % set false/true to hide/show the lowo in the left header
+ %logo=true %set false/true to hide/show the logo in the left header
 } 
-
+\titlesetup{
+  %theme=assignment/project, 
+  %title=your title,
+  %subtitle=your subtitle (only displayed in the project theme!) ,
+  %author= youself or {Yourself, Colaborators} (don't forget the braces if you are going to add commas in the key),
+  %subject=the subject of the assignment (only in the assignment theme!),
+  %supervisor=your supervisor (only in the project theme!) ,
+  %date= the date (other option \today) (only in the assignment theme!),
+  %academicyear=the academic year (only in the project theme!),
+  %projectname=features of project (only in the project theme!) (e.g. Bachelor Thesis, Master Thesis, Final Project, etc.),
+  %projectsubname=other features about the project,
+} 
 %\mathtoolsset{showonlyrefs=true} % for showing number only in labeled equations
 % \allowdisplaybreaks[2] in case you want your equations to be broken across pages
 %\let\vec\mathbf % display vectors in bold instead of with an arrow

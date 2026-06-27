@@ -1,5 +1,5 @@
 # Required packages
-- esvect: it is included in for texlive installations in texlive-fonts-extra. 
+- esvect: it is included in texlive installations in texlive-fonts-extra. 
 
 # Contents
 ## Packages 
@@ -155,10 +155,11 @@ The metadata needed is collected through 3 commands:
     - For the project theme it can also be set a subtitle via the `subtitle` key. In case it is defined with the assignment theme, it will be ignored. These will be the standard behaviour for keys used in themes different to the ones for which they were made. 
     - The author is stored in the key `author`, common to both themes. 
     - For the assignment theme, the subject can be stored in the key `subject`. 
-    - For the project theme, the type of project can be stored in the key `projectname` and additional features in the key `projectsubname`. 
+    - For the project theme, the type of project can be stored in the key `projectname` and additional features in the key `projectsubname`. This two can be combined according to the display desired by the user. For instance, let's assume the user is dealing with a Master Thesis in Science, then as the subname is placed in a diferent line the user may use either _Master in Science_ for the `projectname` and _Thesis_ for the `projectsubname` or just use _Master's Thesis in Science_ in the `projectname` key. 
     - For the project theme there can also defined the fields: _supervisor_ and _academic year_ with keys with the same name: `supervisor`, `academicyear`. 
     - For the assignment theme the date is stored in the key `date`. 
-
+ 
+**Future implementations**: add support for changing fields language. 
 #### Other features
 This package uses the `hyperref` package and has the following defaults for its setup: 
 ```latex 
@@ -175,9 +176,13 @@ This package uses the `hyperref` package and has the following defaults for its 
 \urlstyle{same}
 ```
 It also includes a command (`\resetnumpagetitle`) for displaying an empty pagestyle in the current page and reset the numeration in the following one. It is meant to be used for indices and titles in separated pages but it is easily usable in other contexts (e.g. bibliographies, appendices, ...). The page style to be used after using this command can be whichever the user wants, but if the one used by the theme is meant to be used, its name is `academic`. 
+### Other not original packages
+There can be found other useful packages such as: 
+- `dangbox.sty`: credits to: [MrCherub][https://github.com/MrCherub/vimtex-dangbox]
+- `epibox.sty`: credit to: [MrCherub][https://github.com/MrCherub/epibox]
 
 ## Templates 
-
+Here there can be found templates made for using the packages mentioned above. By now there is only one: `fancy_template.tex`. The defaults include the packages: `babel`, `mygeneral` and `mylayout`. 
 ## LaTeX conversors
 
 
