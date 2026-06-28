@@ -190,10 +190,11 @@ Here there can be found templates made for using the packages mentioned above. B
 \documentclass[preview]{standalone}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{colorx}
 
 \begin{document}
 \begin{equation*}
-x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\color{white} x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
 \end{equation*}
 \end{document}
 ```
@@ -204,8 +205,5 @@ text2svg.sh example.tex
 ```
 
 Being the results: 
-<picture>
-<img src="conversors/example.svg" alt="Fórmula Cuadrática" style="background-color: #ffffff; padding: 12px; border-radius: 6px;">
-</picture>
 
-
+![Quadratic Formula](conversors/example.svg)
