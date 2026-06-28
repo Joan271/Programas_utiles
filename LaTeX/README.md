@@ -204,11 +204,6 @@ text2svg.sh example.tex
 ```
 
 Being the results: 
-<picture>
-  <!-- Cuando el usuario usa tema oscuro, añade un fondo blanco -->
-  <source media="(prefers-color-scheme: dark)" srcset="conversors/example.svg" style="background-color: white; padding: 10px; border-radius: 4px;">
-  <!-- Cuando el usuario usa tema claro, se muestra normal -->
-  <img src="conversors/example.svg" alt="Fórmula Cuadrática">
-</picture>
+<img src="formula.svg" alt="Fórmula Cuadrática" style="background-color: #ffffff; padding: 12px; border-radius: 6px;">
 
 
