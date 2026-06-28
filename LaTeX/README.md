@@ -178,8 +178,8 @@ This package uses the `hyperref` package and has the following defaults for its 
 It also includes a command (`\resetnumpagetitle`) for displaying an empty pagestyle in the current page and reset the numeration in the following one. It is meant to be used for indices and titles in separated pages but it is easily usable in other contexts (e.g. bibliographies, appendices, ...). The page style to be used after using this command can be whichever the user wants, but if the one used by the theme is meant to be used, its name is `academic`. 
 ### Other not original packages
 There can be found other useful packages such as: 
-- `dangbox.sty`: credits to: [MrCherub][https://github.com/MrCherub/vimtex-dangbox]
-- `epibox.sty`: credit to: [MrCherub][https://github.com/MrCherub/epibox]
+- `dangbox.sty`: credits to: [MrCherub](https://github.com/MrCherub/vimtex-dangbox)
+- `epibox.sty`: credit to: [MrCherub](https://github.com/MrCherub/epibox)
 
 ## Templates 
 Here there can be found templates made for using the packages mentioned above. By now there is only one: `fancy_template.tex`. The defaults include the packages: `babel`, `mygeneral` and `mylayout`. 
