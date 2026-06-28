@@ -184,5 +184,31 @@ There can be found other useful packages such as:
 ## Templates 
 Here there can be found templates made for using the packages mentioned above. By now there is only one: `fancy_template.tex`. The defaults include the packages: `babel`, `mygeneral` and `mylayout`. 
 ## LaTeX conversors
+- LaTeX to SVG: the bash script `tex2svg.sh` is a tool for converting your LaTeX code into a SVG image. The syntax for using it is: `text2svg.sh file.tex` and the output will be `file.svg`. Here is a minimal example:
+
+```latex
+\documentclass[preview]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\begin{document}
+\begin{equation*}
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{equation*}
+\end{document}
+```
+Calling this file `example.tex` then the conversion is achieved by: 
+
+```bash
+text2svg.sh example.tex
+```
+
+Being the results: 
+<picture>
+  <!-- Cuando el usuario usa tema oscuro, añade un fondo blanco -->
+  <source media="(prefers-color-scheme: dark)" srcset="conversors/example.svg" style="background-color: white; padding: 10px; border-radius: 4px;">
+  <!-- Cuando el usuario usa tema claro, se muestra normal -->
+  <img src="conversors/example.svg" alt="Fórmula Cuadrática">
+</picture>
 
 

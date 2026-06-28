@@ -1,47 +1,47 @@
 #!/bin/bash
 
-# Verifica si se proporcionó un archivo .tex
+# Verifies if the user provided a .tex file as an argument
 if [ -z "$1" ]; then
-    echo "Error : No se ha proporcionado un archivo."
-    echo "Ejemplo de uso: ./tex2svg.sh archivo.tex"
+    echo "Error : .tex file not provided"
+    echo "Example: ./tex2svg.sh file.tex"
     exit 1
 fi
-echo  "Archivo recibido: $1"
+echo  "Input file: $1"
 
-# Archivo y rutas
+# Files and paths
 TEXFILE="$(realpath "$1")"
 BASENAME="$(basename "$TEXFILE" .tex)"
 OUTPUTDIR="$(dirname "$TEXFILE")"
 DVI="$OUTPUTDIR/$BASENAME.dvi"
 SVG="$OUTPUTDIR/$BASENAME.svg"
 
-# Verificar que el archivo tenga extensión .tex
+# Verification that the provided file has a .tex extension
 if [[ "$TEXFILE" != *.tex ]]; then
-    echo "Error: el archivo proporcionado no tiene extensión .tex."
+    echo "Error: file extension is not .tex."
     exit 1
 fi
 
-# Verificar que latex y dvisvgm estén instalados
+# Verification that latex and dvisvgm are installed
 for cmd in latex dvisvgm; do
     if ! command -v $cmd &> /dev/null; then
-        echo "Error: $cmd no está instalado o no está en el PATH."
+        echo "Error: $cmd is not installed or cannot be found in PATH."
         exit 1
     fi
 done
 
-# Compilar el archivo .tex a DVI
+# Compilation of .tex to DVI
 echo "Compilando $TEXFILE a DVI..."
 latex -interaction=nonstopmode -halt-on-error -output-directory="$OUTPUTDIR" "$TEXFILE" > /dev/null
 if [ $? -ne 0 ]; then
-    echo "Error al compilar el archivo LaTeX con latex."
+    echo "Error compiling LaTeX."
     exit 1
 fi
 
-# Convertir DVI a SVG
-echo "Convirtiendo DVI a SVG..."
+# Conversion from DVI to SVG
+echo "Converting DVI to SVG..."
 dvisvgm --no-fonts "$DVI" "$SVG"
 
-# Limpiar archivos intermedios
+# Cleanup of intermediate files
 rm -f "$DVI" "$OUTPUTDIR/$BASENAME.aux" "$OUTPUTDIR/$BASENAME.log" "$OUTPUTDIR/$BASENAME.out"
 
-echo "Conversión completada: $SVG"
+echo "Conversion completed: $SVG"
