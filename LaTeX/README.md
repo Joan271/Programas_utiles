@@ -184,7 +184,7 @@ There can be found other useful packages such as:
 ## Templates 
 Here there can be found templates made for using the packages mentioned above. By now there is only one: `fancy_template.tex`. The defaults include the packages: `babel`, `mygeneral` and `mylayout`. 
 ## LaTeX conversors
-- LaTeX to SVG: the bash script `tex2svg.sh` is a tool for converting your LaTeX code into a SVG image. The tool proves to be useful when dealing with presentation programmes without LaTeX integration such as PowerPoint. Although there are more polished alternatives (see for instance [The IguanaTeX project](https://www.jonathanleroux.org/software/iguanatex/), the simplicity of this tool allows full control over the content and ease on finding errors. The syntax for using it is: `text2svg.sh file.tex` and the output will be `file.svg`. Here is a minimal example:
+- LaTeX to SVG: the bash script `tex2svg.sh` is a tool for converting your LaTeX code into a SVG image. The tool proves to be useful when dealing with presentation programmes without LaTeX integration such as PowerPoint. Although there are more polished alternatives (see for instance [The IguanaTeX project](https://www.jonathanleroux.org/software/iguanatex/)), the simplicity of this tool allows full control over the content and ease on finding errors. The syntax for using it is: `text2svg.sh file.tex` and the output will be `file.svg`. Here is a minimal example:
 
 ```latex
 \documentclass[preview]{standalone}
