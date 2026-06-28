@@ -204,6 +204,8 @@ text2svg.sh example.tex
 ```
 
 Being the results: 
+<picture>
 <img src="formula.svg" alt="Fórmula Cuadrática" style="background-color: #ffffff; padding: 12px; border-radius: 6px;">
+</picture>
 
 
