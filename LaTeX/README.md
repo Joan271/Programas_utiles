@@ -156,10 +156,10 @@ The metadata needed is collected through 3 commands:
     - The author is stored in the key `author`, common to both themes. 
     - For the assignment theme, the subject can be stored in the key `subject`. 
     - For the project theme, the type of project can be stored in the key `projectname` and additional features in the key `projectsubname`. This two can be combined according to the display desired by the user. For instance, let's assume the user is dealing with a Master Thesis in Science, then as the subname is placed in a diferent line the user may use either _Master in Science_ for the `projectname` and _Thesis_ for the `projectsubname` or just use _Master's Thesis in Science_ in the `projectname` key. 
-    - For the project theme there can also defined the fields: _supervisor_ and _academic year_ with keys with the same name: `supervisor`, `academicyear`. 
+    - For the project theme there can also defined the fields: _supervisor_ and _academic year_ with keys with the same name: `supervisor`, `academicyear`. **NOTE**: you can also use _supervisor**s**_ when there are multiple ones. 
     - For the assignment theme the date is stored in the key `date`. 
  
-**Future implementations**: add support for changing fields language. 
+**New implementation**: recently it has been added support for displaying the name of the fields either in Spanish or English (default if babel package is not included). 
 #### Other features
 This package uses the `hyperref` package and has the following defaults for its setup: 
 ```latex 

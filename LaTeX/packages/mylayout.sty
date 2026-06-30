@@ -1,6 +1,25 @@
 \ProvidesPackage{packages/mylayout}[2024/06/01 Custom layout for documents]
 \RequirePackage{pgfkeys, graphicx, caption, subcaption, fancyhdr,ifthen,hyperref,float, xcolor, titling} 
 %% ===========================
+%% ENGLISH-SPANISH TRANSLATION
+%% ===========================
+\providecommand{\byname}{by}
+\providecommand{\supervisorname}{Supervisor}
+\providecommand{\academicyearname}{Academic Year}
+
+%SPANISH TRANSLATION
+\addto\captionsspanish{\def\byname{por}}
+\addto\captionsspanish{\def\supervisorname{Director}}
+\addto\captionsspanish{\def\supervisorsname{Directores}}
+\addto\captionsspanish{\def\academicyearname{Año Académico}}
+
+%ENGLISH TRANSLATION
+\addto\captionsenglish{\def\byname{by}}
+\addto\captionsenglish{\def\supervisorname{Supervisor}}
+\addto\captionsenglish{\def\supervisorsname{Supervisors}}
+\addto\captionsenglish{\def\academicyearname{Academic Year}}
+
+%% ===========================
 %% TITLES
 %% ===========================
 
@@ -86,6 +105,7 @@
   author/.store in=\@title@author,
   subject/.store in=\@title@subject,
   supervisor/.store in=\@title@supervisor,
+  supervisors/.store in=\@title@supervisors,
   date/.store in=\@title@date,
   academicyear/.store in=\@title@academicyear,
   projectname/.store in=\@title@projectname,
@@ -100,6 +120,7 @@
  author={}, 
  subject={},
  supervisor={},
+ supervisors={},
  date={}, 
  academicyear={},
  projectname={},
@@ -191,16 +212,21 @@
        \vspace*{0.3cm}
        }
        \renderifnotempty{\@title@author}{
-         {\Large by\par\vspace*{0.3cm}}
+         {\Large \protect\byname \par\vspace*{0.3cm}}
       {\Large\@title@author}
        }
        \renderifnotempty{\@title@supervisor}{
        \vfill
        \raggedright 
-       {\large\textbf{Supervisor:} \@title@supervisor\par}
+       {\large\textbf{\protect\supervisorname:} \@title@supervisor\par}
+       }
+       \renderifnotempty{\@title@supervisors}{
+       \vfill
+       \raggedright 
+       {\large\textbf{\protect\supervisorsname:} \@title@supervisors\par}
        }
        \renderifnotempty{\@title@academicyear}{
-         {\large\textbf{Academic Year:} \@title@academicyear\par}
+         {\large\textbf{\protect\academicyearname:} \@title@academicyear\par}
        }
      \end{titlepage} 
     }
